@@ -1,6 +1,8 @@
 <?php
 if($_POST["btn_submit"]) {
+
 }
-if($_POST["btn_back"]) {
+else($_POST["btn_back"]) {
+	include 'index.php'
 }
 ?>
