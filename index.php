@@ -10,19 +10,19 @@
 <body>
 <form action="confirm.php" method="post"> 
   <div>
-    <label for="name">名前:</label>
-    <input type="text" id="name" name="user_name" />
+    <label for="name" >名前:</label>
+    <input type="text" id="name" name="user_name" required/>
   </div>
   <div>
-    <label for="phone">電話番号:</label>
-    <input type="phone" id="phone" name="user_phone" />
+    <label for="phone" >電話番号:</label>
+    <input type="tel" id="phone" name="user_phone" required />
   </div>
   <div>
-    <label for="msg">問い合わせ内容:</label>
-    <textarea id="msg" name="user_message"></textarea>
+    <label for="msg" >問い合わせ内容:</label>
+    <textarea id="msg" name="user_message" required></textarea>
   </div>
   <div>
-    <input class="button1" name = "btn_confirm" type="submit" value="お問い合わせ確認画面へ">
+    <input class="button1" name = "btn_confirm" type="submit" value="送信">
   </div>
 </form>
 </body>

@@ -5,17 +5,29 @@ if($_POST["btn_submit"]) {
     $password = NULL;
     $dbname = 'usermessage';
 
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    if ($conn->connect_error) {
-        die("connection failed: " . $conn->connnect_error);
-    }
+    $conn = new mysqli($servername, $username, $password);
+	if ($conn->connect_error) {
+	    die("Connection failed: " . $conn->connect_error);
+	} 
 
-    $sql = "CREATE TABLE message (
-        id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
-        name VARCHAR(30) NOT NULL,
-        phone int NOT NULL,
-        message VARCHAR(500) NOT NULL
-        )";
+	if($conn->select_db($dbname) === false){
+        $sql  = "CREATE DATABASE IF NOT EXISTS usermessage";
+        
+        if($conn->query($sql) ===TRUE){
+            $conn->select_db($dbname);
+            $sql = "CREATE TABLE message (
+	        id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
+	        name VARCHAR(30) NOT NULL,
+	        phone int NOT NULL,
+	        message VARCHAR(500) NOT NULL
+	       )";
+            if($conn->query($sql) === false){
+                echo "Error creating database: " . $db->error;
+            }
+        } else {
+            echo "Error creating database: " . $db->error;
+        }
+    }
 
     if(isset($_POST['user_name'])){
         if(!isset($_POST['user_name']) || !isset($_POST['user_phone']) || !isset($_POST['user_message'])) {
@@ -34,8 +46,5 @@ if($_POST["btn_submit"]) {
         }
     }
     $conn->close();
-}
-else($_POST["btn_back"]) {
-	include 'index.php'
 }
 ?>
